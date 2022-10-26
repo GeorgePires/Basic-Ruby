@@ -22,4 +22,4 @@ numbers.map! do |n|
     n ** 2
 end
 
-puts "\n Os numeros adicionados elevado a segunda potencia: \n #{numbers}"
+puts "\n Elevado a segunda potência: \n #{numbers}"
