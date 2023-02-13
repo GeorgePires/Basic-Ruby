@@ -1,10 +1,16 @@
+ADD_RECEITA = 1
+PUTS_RECEITAS = 2
+BUSCAR_RECEITAS = 3
+SAIR = 4
 puts "Bem-vindo ao Cookbook, sua rede social de receitas"
 
 def menu
+  puts
   puts " ------------------------------------------------"
-  puts "[1] Cadastrar uma receita"
-  puts "[2] Ver todas ás receitas"
-  puts "[3] Sair"
+  puts "[#{ADD_RECEITA}] Cadastrar uma receita"
+  puts "[#{PUTS_RECEITAS}] Ver todas ás receitas"
+  puts "[#{BUSCAR_RECEITAS}] Buscar receitas"
+  puts "[#{SAIR}] Sair"
   puts " ------------------------------------------------"
 
   print "Escolha uma opção: "
@@ -30,20 +36,41 @@ def puts_receitas(receitas)
   receitas.each do |receita|
     puts "#{receita[:nome]} - #{receita[:tipo]}"
   end
+  if receitas.empty?
+    puts "Nenhuma receita cadastrada :("
+  end
+end
+
+def buscar_receitas(receitas)
+  puts "Qual receita deseja verificar? "
+  pesquisa = gets.chomp
+
+  receitas.each do |receita|
+    if receita[:nome] == pesquisa || receita[:tipo] == pesquisa
+      puts "#{receita[:nome]} - #{receita[:tipo]}"
+    else
+      puts 'Nenhuma receita encontrada O.o'
+    end
+  end
 end
 
 opcao = menu()
 
-while (opcao != 3)
-  if (opcao == 1)
+loop do
+  if (opcao == ADD_RECEITA)
     add_receita(receitas)
-  elsif (opcao == 2)
+  elsif (opcao == PUTS_RECEITAS)
     puts_receitas(receitas)
+  elsif (opcao == BUSCAR_RECEITAS)
+    buscar_receitas(receitas)
+  elsif (opcao == SAIR)
+    break
   else
-    puts "Opção inválida :("
+    puts 'Opção inválida'
   end
 
   opcao = menu()
 end
 
+puts
 puts "Obrigado por usar o CookBook :)"
