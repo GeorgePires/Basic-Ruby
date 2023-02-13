@@ -11,31 +11,39 @@ def menu
   return gets.to_i
 end
 
+receitas = []
+
+def add_receita(receitas)
+  puts "Digite o nome da receita: "
+  nome = gets.chomp
+
+  puts "Digite o tipo da receita: "
+  tipo = gets.chomp
+
+  receitas << { nome: nome, tipo: tipo }
+  puts "Receita #{nome} cadastrada com sucesso!"
+  puts
+end
+
+def puts_receitas(receitas)
+  puts "=============== Receitas cadastradas =================="
+  receitas.each do |receita|
+    puts "#{receita[:nome]} - #{receita[:tipo]}"
+  end
+end
+
 opcao = menu()
 
-receitas = []
 while (opcao != 3)
   if (opcao == 1)
-    puts "Digite o nome da receita: "
-    nome = gets.chomp
-    
-    puts "Digite o tipo da receita: "
-    tipo = gets.chomp
-
-    receitas << { nome: nome, tipo: tipo }
-    puts "Receita #{nome} cadastrada com sucesso!"
-    puts
-
+    add_receita(receitas)
   elsif (opcao == 2)
-    puts '=============== Receitas cadastradas =================='
-    receitas.each do |receita|
-     puts "#{receita[:nome]} - #{receita[:tipo]}" 
-    end
+    puts_receitas(receitas)
   else
-    puts 'Opção inválida :('
+    puts "Opção inválida :("
   end
 
   opcao = menu()
 end
 
-puts 'Obrigado por usar o CookBook :)'
+puts "Obrigado por usar o CookBook :)"
